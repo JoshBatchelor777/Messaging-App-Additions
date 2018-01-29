@@ -1,0 +1,72 @@
+﻿@model Bewander.ViewModels.ChatboxViewModel
+@using Microsoft.AspNet.Identity
+
+<!--Chat: Conversation Classes-->
+<div class="chat-convo-container" id="chat-convo-@Model.RelationshipID">
+    <div class="chat-convo-header" style="background-color:#555" ondblclick="HideChatConvo('chat-convo-@Model.RelationshipID')">
+
+        @Html.Action("LilMessagePic", "Images", new { IDtargetuser = @Model.TargetUser.UserID })
+        <h4 class="name-header">@Model.TargetUser.Name</h4>
+        @if ((int)Model.relationshipStatus == 4)
+        {
+            <i class="fa fa-user-plus add-user-friend" onclick="AddFriend('@Model.TargetUser.UserID')"></i>
+        }
+        <i class="fa fa-close close-icon" onclick="RemoveElement(@Model.RelationshipID)"></i>
+    </div>
+
+    <ul class="conversation" id="conversation-@Model.RelationshipID">
+        @foreach (var message in Model.Messages)
+        {
+            string timeStamp = message.TimeStamp(message.DateTime);
+
+            var last = Model.Messages.Last();
+
+
+            if (message.UserID == User.Identity.GetUserId())
+            {
+                <li class="current-user-message">@message.Content</li>
+
+                if (timeStamp.Contains("ago") && message.Equals(last))
+                {
+                    <li class="date-time">@timeStamp</li>
+                }
+                if (timeStamp.Contains("minutes") || timeStamp.Contains("hour") || timeStamp.Contains("day"))
+                {
+                    <li class="date-time">@timeStamp</li>
+                }
+            }
+            else
+            {
+                <li style="width: auto;"> @message.Content </li>
+            }
+        }
+    </ul>
+
+    @* A start on Asynchronicity (maybe):
+        Below is a function to check through every single list item on this view
+        and refresh the time stamp. Currently does nothing.*@
+    @*<script type="text/javascript">
+            $(function checkTime() {
+                @{
+                    message result = Model.Messages.FindLast(
+                    delegate (lastTimeStamp )
+                    {
+
+                    });
+                }
+                var item = @Model.Messages;
+                var element = document.activeElement;
+                $(item).load(lastTimeStamp)
+                var activeChatBox = element.getAttribute('Model.Messages');
+                element.onkeyup = function(event) {
+                    if (event.keycode == 13) {
+                        window.setInterval(checkTime, 60000);
+                    }
+                }
+
+            });
+        </script>*@
+
+    @Html.Editor("chat-user-input-" + Model.RelationshipID, new { htmlAttributes = new { @class = "chat-user-input", placeholder = "Message...", relID = Model.RelationshipID } })
+</div>
+<h4 class="target-user-tab" id="chat-convo-@Model.RelationshipID-tab" onclick="ShowChatConvo('chat-convo-@Model.RelationshipID')">@Model.TargetUser.Name</h4>

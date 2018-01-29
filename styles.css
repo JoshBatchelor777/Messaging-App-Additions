@@ -1,0 +1,77 @@
+
+/* Chat Convo Container (All conversation tabs) */
+#chat-tabs-container {
+  position: fixed;
+  bottom: 62px;
+  right: .5%;
+  max-width: 1000px;
+  z-index: 1000; }
+
+.chat-convo-container {
+  height: 415px;
+  width: 270px;
+  border: 1px solid #A9A9A9;
+  box-shadow: 2px 5px 5px #9C9C9C;
+  float: right;
+  margin-right: 11px;
+  bottom: 0; }
+
+.chat-convo-header {
+    border-bottom: 1px solid #A9A9A9;
+    padding: 10px;
+    color: #fff; }
+
+.chat-convo-header:hover {
+  cursor: pointer; }
+
+.chat-convo-header * {
+  display: inline; }
+
+.chat-convo-header .close-icon {
+  float: right; }
+
+.chat-convo-header i:hover {
+  color: #000; }
+
+.conversation {
+  height: 320px;
+  width: 100%;
+  background-color:#fff;
+  overflow: scroll;
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-bottom: 10px;
+  overflow-x: hidden;}
+
+.conversation::-webkit-scrollbar-thumb {
+        background-color: grey;
+    } /*changed the scroll bar in the chatbox from green to grey.*/
+
+ .conversation li {
+     list-style: none;
+     max-width: 97%;
+     border-radius: 8px;
+     padding: 3px 3px 3px 7px;
+     margin: 3px 100%;
+     width: max-content;}
+
+.current-user-message {
+    background-color: #91D0B2 !important;
+    color: #FDFDFD;
+    border: 1px solid #91D0B2 !important;
+    margin-right: 5px !important;
+    margin-bottom: 0px !important;
+    text-align: left;
+    float: right !important;
+    font-size: 14px;
+    word-wrap: break-word;}
+
+.date-time {
+    background-color: none;
+    color: #000;
+    float: right !important;
+    border: none !important;
+    line-height: 10px;
+    margin-right: 10px !important;
+    overflow: hidden;
+    font-size:12px;}
